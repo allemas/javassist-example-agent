@@ -1,19 +1,15 @@
 package com.byteprofile;
 
-import java.lang.management.MemoryType;
 import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class MyEngine {
+public class MyEngines {
 
     private String[] engineWords = {"Turbo", "Vortex", "Rocket", "Nitro", "Piston", "Propeller", "Booster", "Fusion"};
     private String[] funnyAdjectives = {"Wacky", "Bizarre", "Cheesy", "Fluffy", "Zany", "Silly", "Crazy", "Quirky"};
     private String[] nouns = {"Penguin", "Banana", "Duck", "Unicorn", "Cucumber", "Squirrel", "Muffin", "Zombie"};
-
-
-    public MyEngine() {}
 
     public void start() throws Exception{
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
@@ -43,7 +39,7 @@ public class MyEngine {
     }
 
 
-    public static MyEngine build() {
-        return new MyEngine();
+    public static MyEngines build() {
+        return new MyEngines();
     }
 }
