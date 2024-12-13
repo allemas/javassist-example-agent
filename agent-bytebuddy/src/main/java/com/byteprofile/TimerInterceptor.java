@@ -13,7 +13,7 @@ public class TimerInterceptor {
                                    @SuperCall Callable<?> callable) {
         long start = System.currentTimeMillis();
         try {
-            return callable.call();
+            return callable.call(); //<-------
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
