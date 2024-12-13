@@ -15,7 +15,7 @@ public class MyEngines {
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
         Runnable task = () -> {
             try {
-                printStatusTask();
+                printLogs();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -35,7 +35,7 @@ public class MyEngines {
         return engineWord + " " + adjective + " " + noun;
     }
 
-    private void printStatusTask() throws Exception{
+    private void printLogs() throws Exception{
         System.out.println(String.format("%s has successfully wrapped up their task like a pro!", getEngineName()));
     }
 

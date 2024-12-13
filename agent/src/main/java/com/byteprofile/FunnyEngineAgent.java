@@ -3,6 +3,7 @@ package com.byteprofile;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtMethod;
+import javassist.NotFoundException;
 
 
 import java.lang.instrument.ClassFileTransformer;
@@ -15,7 +16,9 @@ public class FunnyEngineAgent {
         HumourFactory.printName();
         inst.addTransformer(new ClassFileTransformer() {
             @Override
-            public byte[] transform(ClassLoader classLoader, String className, Class<?> aClass, ProtectionDomain protectionDomain, byte[] bytes) {
+            public byte[] transform(ClassLoader classLoader, String className, Class<?> aClass, ProtectionDomain
+                    protectionDomain, byte[] bytes) {
+
                 if (className.equals("com/byteprofile/MyEngines")) {
                     try {
                         ClassPool classPool = ClassPool.getDefault();
@@ -24,13 +27,11 @@ public class FunnyEngineAgent {
                         CtMethod startMethod = ctClass.getDeclaredMethod("start");
                         startMethod.insertBefore(HumourFactory.getBeforeStartMethodCode());
 
-                        CtMethod printStatusTaskMethod = ctClass.getDeclaredMethod("printStatusTask");
+                        CtMethod printStatusTaskMethod = ctClass.getDeclaredMethod("printLogs");
                         printStatusTaskMethod.insertBefore(HumourFactory.getCodeBeforePrintLog());
-
                         printStatusTaskMethod.insertAfter("{ System.out.println(\"\\\033[0m\\n\"); " +
                                 "System.out.println(\"\\\033[1;32mAgent : YOUPI! The engine has finished responding! 🎉\\\033[0m\"); " +
                                 "}");
-
                         byte[] newBytecode = ctClass.toBytecode();
                         ctClass.detach();
                         return newBytecode;
@@ -41,5 +42,7 @@ public class FunnyEngineAgent {
                 return bytes;
             }
         });
+
+
     }
 }

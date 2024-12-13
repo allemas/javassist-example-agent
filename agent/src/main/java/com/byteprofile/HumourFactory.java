@@ -29,7 +29,6 @@ public class HumourFactory {
 
     public static void printName() {
         System.out.println("[FunnyEngineAgent] In premain method is active!");
-
         System.out.println("\033[1;34m" +
                 "  ______                                                                       _   \n" +
                 " |  ____|                                       /\\                            | |  \n" +
